@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>وش ناكل؟ 😂❤️</title>
+<style>
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background:
+        radial-gradient(circle at 20% 20%, #ffdce4 0 2px, transparent 3px),
+        radial-gradient(circle at 80% 70%, #ffdce4 0 2px, transparent 3px),
+        linear-gradient(135deg, #fff 0%, #fff4f6 100%);
+    color: #7d1830;
+    overflow-x: hidden;
+}
+.container {
+    width: 100%;
+    max-width: 520px;
+    margin: auto;
+    padding: 30px 18px 50px;
+    text-align: center;
+}
+h1 {
+    font-size: 34px;
+    margin: 15px 0 8px;
+}
+.subtitle {
+    color: #8f5965;
+    font-size: 16px;
+    line-height: 1.7;
+}
+.card {
+    background: rgba(255,255,255,.9);
+    border-radius: 28px;
+    padding: 25px 18px;
+    margin-top: 25px;
+    box-shadow: 0 15px 45px rgba(125,24,48,.12);
+    border: 1px solid #ffd2dc;
+}
+.wheel-wrap {
+    width: 310px;
+    height: 310px;
+    margin: 25px auto;
+    position: relative;
+}
+.pointer {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    width: 0;
+    height: 0;
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 35px solid #8d1731;
+}
+.wheel {
+    width: 310px;
+    height: 310px;
+    border-radius: 50%;
+    border: 8px solid white;
+    box-shadow: 0 10px 30px rgba(100,20,40,.2);
+    background: conic-gradient(
+        #ffb5c5 0deg 90deg,
+        #ffdee5 90deg 180deg,
+        #d92d50 180deg 270deg,
+        #ffd0da 270deg 360deg
+    );
+    position: relative;
+    transition: transform 4s cubic-bezier(.12,.8,.2,1);
+}
+.label {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 25%;
+    top: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 15px;
+    color: #681327;
+}
+.l1 {
+    transform: rotate(45deg) translateY(-83px);
+}
+.l2 {
+    transform: rotate(135deg) translateY(-83px);
+}
+.l3 {
+    transform: rotate(225deg) translateY(-83px);
+    color: white;
+}
+.l4 {
+    transform: rotate(315deg) translateY(-83px);
+}
+.spin-btn {
+    border: none;
+    background: #9d1835;
+    color: white;
+    padding: 16px 35px;
+    border-radius: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(157,24,53,.25);
+    transition: .2s;
+}
+.spin-btn:active {
+    transform: scale(.94);
+}
+.spin-btn:disabled {
+    opacity: .6;
+}
+.result {
+    display: none;
+    margin-top: 25px;
+    animation: pop .5s ease;
+}
+.result.show {
+    display: block;
+}
+.result-box {
+    background: #fff5f7;
+    border: 2px solid #ffd0da;
+    border-radius: 22px;
+    padding: 22px 15px;
+}
+.result-title {
+    font-size: 27px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+.result-text {
+    font-size: 17px;
+    line-height: 1.8;
+    color: #6f2838;
+}
+.again {
+    margin-top: 15px;
+    background: white;
+    color: #9d1835;
+    border: 2px solid #9d1835;
+    padding: 11px 22px;
+    border-radius: 30px;
+    cursor: pointer;
+}
+.food-list {
+    margin-top: 22px;
+    font-size: 14px;
+    color: #98606c;
+}
+.heart {
+    position: fixed;
+    color: #ffb5c5;
+    font-size: 18px;
+    pointer-events: none;
+    animation: floatUp 9s linear infinite;
+    opacity: .65;
+}
+@keyframes floatUp {
+    from {
+        transform: translateY(110vh);
+    }
+    to {
+        transform: translateY(-15vh);
+    }
+}
+@keyframes pop {
+    0% {
+        transform: scale(.7);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.confetti {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    font-size: 25px;
+    pointer-events: none;
+    z-index: 20;
+}
+</style>
+</head>
+<body>
+<div id="hearts"></div>
+<div class="container">
+    <h1>🍗 وش ناكل اليوم؟ 😂❤️</h1>
+    <div class="subtitle">
+        بما إنك قلتي تبين تختارين الأكل…<br>
+        قررت أخليك تختارين بطريقة عادلة جدًا جدًا 👀
+    </div>
+    <div class="card">
+        <div class="pointer"></div>
+        <div class="wheel-wrap">
+            <div class="wheel" id="wheel">
+                <div class="label l1">
+                    Plenty Sld’s
+                </div>
+                <div class="label l2">
+                    مضغوط 🍚
+                </div>
+                <div class="label l3">
+                    مطبق 🥞
+                </div>
+                <div class="label l4">
+                    Subway 🥪
+                </div>
+            </div>
+        </div>
+        <button class="spin-btn" id="spinBtn" onclick="spin()">
+            🎲 خل نشوف حظك
+        </button>
+        <div class="food-list">
+            الخيارات محددة مسبقًا… لا تحاولين تتفاوضين 😂
+        </div>
+        <div class="result" id="result">
+            <div class="result-box">
+                <div class="result-title" id="resultTitle"></div>
+                <div class="result-text" id="resultText"></div>
+                <button class="again" onclick="resetWheel()">
+                    أجرب حظي مرة ثانية 😂
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- الصوت -->
+<div style="display:none;">
+    <iframe
+        id="soundFrame"
+        width="1"
+        height="1"
+        src="https://www.youtube.com/embed/9D9J4i3SasQ?enablejsapi=1"
+        allow="autoplay">
+    </iframe>
+</div>
+<script>
+const wheel = document.getElementById("wheel");
+const spinBtn = document.getElementById("spinBtn");
+const result = document.getElementById("result");
+const resultTitle = document.getElementById("resultTitle");
+const resultText = document.getElementById("resultText");
+let rotation = 0;
+let spinning = false;
+const foods = [
+    {
+        name: "Plenty Sld’s 🍔",
+        message: "حظك حلو 😂❤️ هذا عليّ، أنا بجيبه لك."
+    },
+    {
+        name: "مضغوط 🍚",
+        message: "أوه المضغوط 😭❤️ هذا عليّ، لا تشيلين هم."
+    },
+    {
+        name: "مطبق 🥞",
+        message: "راحت عليك 😭😂<br><br><b>مافي دلع أوكي؟</b><br>أنتِ اللي تشترينه هالمرة 😭"
+    },
+    {
+        name: "Subway 🥪",
+        message: "Subway! 😂❤️ خلاص هذا عليّ، أنا بجيبه لك."
+    }
+];
+function spin() {
+    if (spinning) return;
+    spinning = true;
+    spinBtn.disabled = true;
+    result.classList.remove("show");
+    /*
+       اختيار عشوائي:
+       0 = Plenty
+       1 = مضغوط
+       2 = مطبق
+       3 = Subway
+    */
+    const selected = Math.floor(Math.random() * 4);
+    /*
+       كل خيار 90 درجة.
+       نضيف عدة دورات عشان العجلة تلف بشكل واضح.
+    */
+    const targetAngle = 360 - (selected * 90 + 45);
+    rotation += 360 * 6 + targetAngle;
+    wheel.style.transform = `rotate(${rotation}deg)`;
+    setTimeout(() => {
+        const food = foods[selected];
+        resultTitle.innerHTML = food.name;
+        resultText.innerHTML = food.message;
+        result.classList.add("show");
+        /*
+           إذا طلع المطبق:
+           صوت الضحك + مؤثرات ضحك
+        */
+        if (selected === 2) {
+            playLaugh();
+            funnyConfetti();
+        } else {
+            cuteConfetti();
+        }
+        spinning = false;
+        spinBtn.disabled = false;
+    }, 4100);
+}
+function resetWheel() {
+    result.classList.remove("show");
+    setTimeout(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+    }, 100);
+}
+/*
+   تشغيل صوت YouTube
+*/
+function playLaugh() {
+    const iframe = document.getElementById("soundFrame");
+    iframe.contentWindow.postMessage(
+        JSON.stringify({
+            event: "command",
+            func: "playVideo",
+            args: []
+        }),
+        "*"
+    );
+}
+/*
+   قلوب عادية
+*/
+function cuteConfetti() {
+    const icons = ["❤️", "💗", "💕", "✨"];
+    for (let i = 0; i < 18; i++) {
+        const el = document.createElement("div");
+        el.className = "confetti";
+        el.innerHTML =
+            icons[Math.floor(Math.random() * icons.length)];
+        document.body.appendChild(el);
+        const x = (Math.random() - .5) * 450;
+        const y = (Math.random() - .5) * 450;
+        el.animate(
+            [
+                {
+                    transform: "translate(-50%,-50%) scale(.5)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                    `translate(${x}px,${y}px) scale(1.4)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 1300,
+                easing: "ease-out"
+            }
+        );
+        setTimeout(() => el.remove(), 1400);
+    }
+}
+/*
+   إذا طلع المطبق 😂
+*/
+function funnyConfetti() {
+    const icons = ["😂", "😭", "💀", "🥞", "😂"];
+    for (let i = 0; i < 30; i++) {
+        const el = document.createElement("div");
+        el.className = "confetti";
+        el.innerHTML =
+            icons[Math.floor(Math.random() * icons.length)];
+        document.body.appendChild(el);
+        const x = (Math.random() - .5) * 550;
+        const y = (Math.random() - .5) * 500;
+        el.animate(
+            [
+                {
+                    transform: "translate(-50%,-50%) scale(.5)",
+                    opacity: 1
+                },
+                {
+                    transform:
+                    `translate(${x}px,${y}px) rotate(360deg) scale(1.5)`,
+                    opacity: 0
+                }
+            ],
+            {
+                duration: 1700,
+                easing: "ease-out"
+            }
+        );
+        setTimeout(() => el.remove(), 1800);
+    }
+}
+/*
+   Floating hearts
+*/
+for (let i = 0; i < 25; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "♡";
+    heart.style.left =
+        Math.random() * 100 + "vw";
+    heart.style.animationDelay =
+        Math.random() * 8 + "s";
+    heart.style.animationDuration =
+        (7 + Math.random() * 8) + "s";
+    document.getElementById("hearts")
+        .appendChild(heart);
+}
+</script>
+</body>
+</html>
