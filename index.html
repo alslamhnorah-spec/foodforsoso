@@ -1,422 +1,869 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>وش ناكل؟ 😂❤️</title>
+
+<title>WHAT ARE WE EATING?</title>
+
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Cairo:wght@500;700;800&display=swap');
+
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, #ffdce4 0 2px, transparent 3px),
-        radial-gradient(circle at 80% 70%, #ffdce4 0 2px, transparent 3px),
-        linear-gradient(135deg, #fff 0%, #fff4f6 100%);
-    color: #7d1830;
+    background: #f6efdf;
+    color: #241b15;
+    font-family: Cairo, Arial, sans-serif;
     overflow-x: hidden;
 }
+
+/* Food pattern */
+body::before {
+    content: "🍔   🍟   🥪   🍗   🍕   🥞   🍔   🍟   🥪";
+    position: fixed;
+    inset: 0;
+    font-size: 38px;
+    line-height: 110px;
+    letter-spacing: 25px;
+    opacity: .045;
+    transform: rotate(-10deg) scale(1.2);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Top bar */
+.top {
+    background: #e74724;
+    color: white;
+    padding: 14px 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 5px solid #241b15;
+}
+
+.logo {
+    font-family: Anton, sans-serif;
+    font-size: 25px;
+    letter-spacing: 1px;
+}
+
+.badge {
+    background: #ffd34e;
+    color: #241b15;
+    padding: 6px 11px;
+    border: 2px solid #241b15;
+    box-shadow: 3px 3px 0 #241b15;
+    font-weight: 800;
+    transform: rotate(3deg);
+}
+
+/* Main */
 .container {
-    width: 100%;
-    max-width: 520px;
+    max-width: 540px;
     margin: auto;
-    padding: 30px 18px 50px;
+    padding: 30px 18px 60px;
     text-align: center;
 }
+
+/* Hero */
+.hero {
+    background: #fffaf0;
+    border: 4px solid #241b15;
+    box-shadow: 8px 8px 0 #241b15;
+    padding: 30px 15px;
+    transform: rotate(-1deg);
+}
+
+.food-icons {
+    font-size: 50px;
+}
+
 h1 {
-    font-size: 34px;
-    margin: 15px 0 8px;
+    font-family: Anton, sans-serif;
+    font-size: 48px;
+    line-height: .95;
+    margin: 15px 0;
 }
-.subtitle {
-    color: #8f5965;
-    font-size: 16px;
-    line-height: 1.7;
+
+.hero p {
+    color: #66584d;
+    font-size: 15px;
+    font-weight: 700;
 }
-.card {
-    background: rgba(255,255,255,.9);
-    border-radius: 28px;
-    padding: 25px 18px;
-    margin-top: 25px;
-    box-shadow: 0 15px 45px rgba(125,24,48,.12);
-    border: 1px solid #ffd2dc;
+
+/* Button */
+button {
+    font-family: Cairo, Arial, sans-serif;
+    font-weight: 800;
+    cursor: pointer;
 }
-.wheel-wrap {
+
+.main-btn {
+    margin-top: 22px;
+    background: #241b15;
+    color: white;
+    border: none;
+    padding: 16px 35px;
+    font-size: 18px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 0 #e74724;
+    transition: .15s;
+}
+
+.main-btn:active {
+    transform: translate(3px,3px);
+    box-shadow: 2px 2px 0 #e74724;
+}
+
+/* Roulette */
+.roulette {
+    margin-top: 35px;
+    background: #fffaf0;
+    border: 4px solid #241b15;
+    box-shadow: 8px 8px 0 #241b15;
+    padding: 25px 14px 30px;
+}
+
+.title {
+    font-family: Anton, sans-serif;
+    font-size: 32px;
+}
+
+.small {
+    color: #756459;
+    font-size: 14px;
+}
+
+/* Wheel */
+.wheel-area {
     width: 310px;
     height: 310px;
     margin: 25px auto;
     position: relative;
 }
-.pointer {
-    position: absolute;
-    top: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    width: 0;
-    height: 0;
-    border-left: 18px solid transparent;
-    border-right: 18px solid transparent;
-    border-top: 35px solid #8d1731;
-}
+
 .wheel {
     width: 310px;
     height: 310px;
     border-radius: 50%;
-    border: 8px solid white;
-    box-shadow: 0 10px 30px rgba(100,20,40,.2);
+    border: 9px solid #241b15;
+
     background: conic-gradient(
-        #ffb5c5 0deg 90deg,
-        #ffdee5 90deg 180deg,
-        #d92d50 180deg 270deg,
-        #ffd0da 270deg 360deg
+        #f36b3c 0deg 120deg,
+        #ffd34e 120deg 240deg,
+        #e74724 240deg 360deg
     );
+
     position: relative;
-    transition: transform 4s cubic-bezier(.12,.8,.2,1);
+
+    box-shadow:
+        inset 0 0 0 5px #fffaf0,
+        8px 8px 0 #241b15;
+
+    transition:
+        transform 4s cubic-bezier(.12,.8,.18,1);
 }
-.label {
+
+/* Food labels */
+.food {
     position: absolute;
     width: 50%;
     height: 50%;
     left: 25%;
     top: 25%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 900;
+    font-size: 15px;
+    text-align: center;
+    z-index: 2;
+}
+
+.food span {
+    width: 105px;
+    line-height: 1.2;
+}
+
+.food1 {
+    transform: rotate(60deg) translateY(-82px);
+}
+
+.food2 {
+    transform: rotate(180deg) translateY(-82px);
+}
+
+.food3 {
+    transform: rotate(300deg) translateY(-82px);
+}
+
+/* Center */
+.center {
+    position: absolute;
+    width: 72px;
+    height: 72px;
+    background: #fffaf0;
+    border: 5px solid #241b15;
+    border-radius: 50%;
+
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 15px;
-    color: #681327;
+
+    font-size: 30px;
+    z-index: 5;
 }
-.l1 {
-    transform: rotate(45deg) translateY(-83px);
+
+/* Pointer */
+.pointer {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: 18px solid transparent;
+    border-right: 18px solid transparent;
+    border-top: 38px solid #241b15;
+
+    z-index: 10;
 }
-.l2 {
-    transform: rotate(135deg) translateY(-83px);
-}
-.l3 {
-    transform: rotate(225deg) translateY(-83px);
-    color: white;
-}
-.l4 {
-    transform: rotate(315deg) translateY(-83px);
-}
-.spin-btn {
-    border: none;
-    background: #9d1835;
-    color: white;
-    padding: 16px 35px;
-    border-radius: 40px;
-    font-size: 18px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 10px 25px rgba(157,24,53,.25);
-    transition: .2s;
-}
-.spin-btn:active {
-    transform: scale(.94);
-}
-.spin-btn:disabled {
-    opacity: .6;
-}
+
+/* Result */
 .result {
     display: none;
-    margin-top: 25px;
+    margin-top: 30px;
     animation: pop .5s ease;
 }
+
 .result.show {
     display: block;
 }
+
 .result-box {
-    background: #fff5f7;
-    border: 2px solid #ffd0da;
-    border-radius: 22px;
-    padding: 22px 15px;
+    background: #ffd34e;
+    border: 4px solid #241b15;
+    padding: 25px 15px;
+    box-shadow: 6px 6px 0 #241b15;
 }
-.result-title {
-    font-size: 27px;
-    font-weight: bold;
-    margin-bottom: 12px;
+
+.result-emoji {
+    font-size: 52px;
 }
+
+.result-name {
+    font-family: Anton, sans-serif;
+    font-size: 40px;
+    margin: 5px 0;
+}
+
 .result-text {
     font-size: 17px;
     line-height: 1.8;
-    color: #6f2838;
+    font-weight: 800;
 }
+
+/* Special Muttabaq message */
+.special {
+    background: #e74724;
+    color: white;
+    border: 3px solid #241b15;
+    margin-top: 18px;
+    padding: 18px 12px;
+    font-size: 20px;
+    font-weight: 900;
+    line-height: 1.7;
+}
+
+/* Again */
 .again {
-    margin-top: 15px;
+    margin-top: 18px;
     background: white;
-    color: #9d1835;
-    border: 2px solid #9d1835;
-    padding: 11px 22px;
-    border-radius: 30px;
-    cursor: pointer;
-}
-.food-list {
-    margin-top: 22px;
+    color: #241b15;
+    border: 3px solid #241b15;
+    padding: 10px 20px;
     font-size: 14px;
-    color: #98606c;
 }
-.heart {
-    position: fixed;
-    color: #ffb5c5;
-    font-size: 18px;
-    pointer-events: none;
-    animation: floatUp 9s linear infinite;
-    opacity: .65;
-}
-@keyframes floatUp {
-    from {
-        transform: translateY(110vh);
-    }
-    to {
-        transform: translateY(-15vh);
-    }
-}
-@keyframes pop {
-    0% {
-        transform: scale(.7);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
+
+/* Confetti */
 .confetti {
     position: fixed;
-    top: 50%;
     left: 50%;
-    font-size: 25px;
+    top: 50%;
+    z-index: 100;
     pointer-events: none;
-    z-index: 20;
+    font-size: 27px;
+}
+
+/* Animation */
+@keyframes pop {
+    from {
+        opacity: 0;
+        transform: scale(.65) rotate(-3deg);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1) rotate(0);
+    }
+}
+
+@media (max-width: 380px) {
+
+    .wheel-area,
+    .wheel {
+        width: 280px;
+        height: 280px;
+    }
+
+    .food1 {
+        transform: rotate(60deg) translateY(-74px);
+    }
+
+    .food2 {
+        transform: rotate(180deg) translateY(-74px);
+    }
+
+    .food3 {
+        transform: rotate(300deg) translateY(-74px);
+    }
+
+    h1 {
+        font-size: 40px;
+    }
 }
 </style>
 </head>
+
 <body>
-<div id="hearts"></div>
+
+<div class="top">
+    <div class="logo">FOOD ROULETTE 🍔</div>
+    <div class="badge">NO CHEATING</div>
+</div>
+
+
 <div class="container">
-    <h1>🍗 وش ناكل اليوم؟ 😂❤️</h1>
-    <div class="subtitle">
-        بما إنك قلتي تبين تختارين الأكل…<br>
-        قررت أخليك تختارين بطريقة عادلة جدًا جدًا 👀
-    </div>
-    <div class="card">
-        <div class="pointer"></div>
-        <div class="wheel-wrap">
-            <div class="wheel" id="wheel">
-                <div class="label l1">
-                    Plenty Sld’s
-                </div>
-                <div class="label l2">
-                    مضغوط 🍚
-                </div>
-                <div class="label l3">
-                    مطبق 🥞
-                </div>
-                <div class="label l4">
-                    Subway 🥪
-                </div>
-            </div>
+
+    <!-- FIRST SCREEN -->
+
+    <div class="hero">
+
+        <div class="food-icons">
+            🍔 🍟 🥪
         </div>
-        <button class="spin-btn" id="spinBtn" onclick="spin()">
-            🎲 خل نشوف حظك
+
+        <h1>
+            WHAT ARE<br>
+            WE EATING?
+        </h1>
+
+        <p>
+            You said you wanted to choose...
+            <br>
+            so let's make it completely fair 😂
+        </p>
+
+        <button
+            class="main-btn"
+            onclick="showRoulette()">
+
+            🎲 LET’S SPIN
+
         </button>
-        <div class="food-list">
-            الخيارات محددة مسبقًا… لا تحاولين تتفاوضين 😂
-        </div>
-        <div class="result" id="result">
-            <div class="result-box">
-                <div class="result-title" id="resultTitle"></div>
-                <div class="result-text" id="resultText"></div>
-                <button class="again" onclick="resetWheel()">
-                    أجرب حظي مرة ثانية 😂
-                </button>
-            </div>
-        </div>
+
     </div>
+
+
+    <!-- ROULETTE -->
+
+    <div
+        class="roulette"
+        id="roulette"
+        style="display:none;">
+
+        <div class="title">
+            FOOD ROULETTE
+        </div>
+
+        <div class="small">
+            No choosing. Let the wheel decide 👀
+        </div>
+
+
+        <div class="wheel-area">
+
+            <div class="pointer"></div>
+
+            <div
+                class="wheel"
+                id="wheel">
+
+                <div class="food food1">
+                    <span>
+                        Plenty Sld’s 🍔
+                    </span>
+                </div>
+
+                <div class="food food2">
+                    <span>
+                        مطبق 🥞
+                    </span>
+                </div>
+
+                <div class="food food3">
+                    <span>
+                        Subway 🥪
+                    </span>
+                </div>
+
+                <div class="center">
+                    🎲
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="main-btn"
+            id="spinBtn"
+            onclick="spin()">
+
+            SPIN IT 🎲
+
+        </button>
+
+
+        <!-- RESULT -->
+
+        <div
+            class="result"
+            id="result">
+
+            <div class="result-box">
+
+                <div
+                    class="result-emoji"
+                    id="resultEmoji">
+                </div>
+
+                <div
+                    class="result-name"
+                    id="resultName">
+                </div>
+
+                <div
+                    class="result-text"
+                    id="resultText">
+                </div>
+
+                <div
+                    id="specialMessage">
+                </div>
+
+                <button
+                    class="again"
+                    onclick="spinAgain()">
+
+                    🔄 SPIN AGAIN
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
 </div>
-<!-- الصوت -->
-<div style="display:none;">
-    <iframe
-        id="soundFrame"
-        width="1"
-        height="1"
-        src="https://www.youtube.com/embed/9D9J4i3SasQ?enablejsapi=1"
-        allow="autoplay">
-    </iframe>
-</div>
+
+
+<!-- YouTube Laugh Sound -->
+
+<iframe
+    id="laughSound"
+    width="1"
+    height="1"
+    style="
+        position:fixed;
+        left:-100px;
+        bottom:-100px;
+        opacity:0;
+        pointer-events:none;
+    "
+    src="https://www.youtube.com/embed/9D9J4i3SasQ?enablejsapi=1"
+    allow="autoplay">
+</iframe>
+
+
 <script>
-const wheel = document.getElementById("wheel");
-const spinBtn = document.getElementById("spinBtn");
-const result = document.getElementById("result");
-const resultTitle = document.getElementById("resultTitle");
-const resultText = document.getElementById("resultText");
+
+const wheel =
+    document.getElementById("wheel");
+
+const result =
+    document.getElementById("result");
+
+const resultEmoji =
+    document.getElementById("resultEmoji");
+
+const resultName =
+    document.getElementById("resultName");
+
+const resultText =
+    document.getElementById("resultText");
+
+const specialMessage =
+    document.getElementById("specialMessage");
+
+const spinBtn =
+    document.getElementById("spinBtn");
+
+
 let rotation = 0;
 let spinning = false;
+
+
+/*
+   3 OPTIONS ONLY
+*/
+
 const foods = [
+
     {
-        name: "Plenty Sld’s 🍔",
-        message: "حظك حلو 😂❤️ هذا عليّ، أنا بجيبه لك."
+        name: "PLENTY SLD’S",
+        emoji: "💋",
+        text: ""
     },
+
     {
-        name: "مضغوط 🍚",
-        message: "أوه المضغوط 😭❤️ هذا عليّ، لا تشيلين هم."
+        name: "مطبق",
+        emoji: "🥞",
+        text: ""
     },
+
     {
-        name: "مطبق 🥞",
-        message: "راحت عليك 😭😂<br><br><b>مافي دلع أوكي؟</b><br>أنتِ اللي تشترينه هالمرة 😭"
-    },
-    {
-        name: "Subway 🥪",
-        message: "Subway! 😂❤️ خلاص هذا عليّ، أنا بجيبه لك."
+        name: "SUBWAY",
+        emoji: "🥪",
+        text: "Subway it is! 😂"
     }
+
 ];
-function spin() {
-    if (spinning) return;
-    spinning = true;
-    spinBtn.disabled = true;
-    result.classList.remove("show");
-    /*
-       اختيار عشوائي:
-       0 = Plenty
-       1 = مضغوط
-       2 = مطبق
-       3 = Subway
-    */
-    const selected = Math.floor(Math.random() * 4);
-    /*
-       كل خيار 90 درجة.
-       نضيف عدة دورات عشان العجلة تلف بشكل واضح.
-    */
-    const targetAngle = 360 - (selected * 90 + 45);
-    rotation += 360 * 6 + targetAngle;
-    wheel.style.transform = `rotate(${rotation}deg)`;
-    setTimeout(() => {
-        const food = foods[selected];
-        resultTitle.innerHTML = food.name;
-        resultText.innerHTML = food.message;
-        result.classList.add("show");
-        /*
-           إذا طلع المطبق:
-           صوت الضحك + مؤثرات ضحك
-        */
-        if (selected === 2) {
-            playLaugh();
-            funnyConfetti();
-        } else {
-            cuteConfetti();
-        }
-        spinning = false;
-        spinBtn.disabled = false;
-    }, 4100);
-}
-function resetWheel() {
-    result.classList.remove("show");
-    setTimeout(() => {
-        window.scrollTo({
-            top: 0,
+
+
+/*
+   SHOW ROULETTE
+*/
+
+function showRoulette() {
+
+    document.getElementById("roulette").style.display =
+        "block";
+
+    document.getElementById("roulette")
+        .scrollIntoView({
             behavior: "smooth"
         });
-    }, 100);
+
 }
+
+
 /*
-   تشغيل صوت YouTube
+   SPIN
 */
+
+function spin() {
+
+    if (spinning) return;
+
+    spinning = true;
+
+    spinBtn.disabled = true;
+
+    result.classList.remove("show");
+
+    specialMessage.innerHTML = "";
+
+
+    /*
+       Random number:
+       0 = Plenty
+       1 = Muttabaq
+       2 = Subway
+    */
+
+    const selected =
+        Math.floor(Math.random() * 3);
+
+
+    /*
+       Each section = 120 degrees
+    */
+
+    const target =
+        360 - (selected * 120 + 60);
+
+
+    /*
+       Six full spins
+    */
+
+    rotation +=
+        360 * 6 + target;
+
+
+    wheel.style.transform =
+        `rotate(${rotation}deg)`;
+
+
+    setTimeout(() => {
+
+        const food =
+            foods[selected];
+
+
+        resultEmoji.innerHTML =
+            food.emoji;
+
+        resultName.innerHTML =
+            food.name;
+
+        resultText.innerHTML =
+            food.text;
+
+
+        /*
+           MUTTABBAQ
+        */
+
+        if (selected === 1) {
+
+            specialMessage.innerHTML = `
+
+                <div class="special">
+
+                    مافي دلع أوكي؟ 😂
+
+                    <br><br>
+
+                    تحصلينه بالجامعة مرة ثانية
+                    <br>
+                    تسوين فطور ببيتكم 🥞😂
+
+                </div>
+
+            `;
+
+            playLaugh();
+
+            funnyConfetti();
+
+        }
+
+
+        /*
+           OTHER FOOD
+        */
+
+        else {
+
+            cuteConfetti();
+
+        }
+
+
+        result.classList.add("show");
+
+        spinning = false;
+
+        spinBtn.disabled = false;
+
+
+        setTimeout(() => {
+
+            result.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }, 200);
+
+
+    }, 4100);
+
+}
+
+
+/*
+   SPIN AGAIN
+*/
+
+function spinAgain() {
+
+    result.classList.remove("show");
+
+    setTimeout(() => {
+
+        document.getElementById("roulette")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }, 200);
+
+}
+
+
+/*
+   PLAY LAUGH
+*/
+
 function playLaugh() {
-    const iframe = document.getElementById("soundFrame");
+
+    const iframe =
+        document.getElementById("laughSound");
+
     iframe.contentWindow.postMessage(
+
         JSON.stringify({
+
             event: "command",
+
             func: "playVideo",
+
             args: []
+
         }),
+
         "*"
+
     );
+
 }
+
+
 /*
-   قلوب عادية
+   NORMAL CONFETTI
 */
+
 function cuteConfetti() {
-    const icons = ["❤️", "💗", "💕", "✨"];
-    for (let i = 0; i < 18; i++) {
-        const el = document.createElement("div");
-        el.className = "confetti";
-        el.innerHTML =
-            icons[Math.floor(Math.random() * icons.length)];
-        document.body.appendChild(el);
-        const x = (Math.random() - .5) * 450;
-        const y = (Math.random() - .5) * 450;
-        el.animate(
-            [
-                {
-                    transform: "translate(-50%,-50%) scale(.5)",
-                    opacity: 1
-                },
-                {
-                    transform:
-                    `translate(${x}px,${y}px) scale(1.4)`,
-                    opacity: 0
-                }
-            ],
-            {
-                duration: 1300,
-                easing: "ease-out"
-            }
-        );
-        setTimeout(() => el.remove(), 1400);
-    }
+
+    createConfetti(
+        ["🍔", "🥪", "🍟", "🎉"],
+        20
+    );
+
 }
+
+
 /*
-   إذا طلع المطبق 😂
+   MUTTABBAQ CONFETTI 😂
 */
+
 function funnyConfetti() {
-    const icons = ["😂", "😭", "💀", "🥞", "😂"];
-    for (let i = 0; i < 30; i++) {
-        const el = document.createElement("div");
-        el.className = "confetti";
+
+    createConfetti(
+        ["😂", "😭", "🥞", "💀", "😂"],
+        35
+    );
+
+}
+
+
+/*
+   CREATE CONFETTI
+*/
+
+function createConfetti(icons, amount) {
+
+    for (let i = 0; i < amount; i++) {
+
+        const el =
+            document.createElement("div");
+
+        el.className =
+            "confetti";
+
         el.innerHTML =
-            icons[Math.floor(Math.random() * icons.length)];
+            icons[
+                Math.floor(
+                    Math.random() * icons.length
+                )
+            ];
+
+
         document.body.appendChild(el);
-        const x = (Math.random() - .5) * 550;
-        const y = (Math.random() - .5) * 500;
+
+
+        const x =
+            (Math.random() - .5) * 550;
+
+        const y =
+            (Math.random() - .5) * 500;
+
+
         el.animate(
+
             [
-                {
-                    transform: "translate(-50%,-50%) scale(.5)",
-                    opacity: 1
-                },
+
                 {
                     transform:
-                    `translate(${x}px,${y}px) rotate(360deg) scale(1.5)`,
+                        "translate(-50%,-50%) scale(.4)",
+
+                    opacity: 1
+                },
+
+                {
+
+                    transform:
+                        `translate(${x}px, ${y}px)
+                         rotate(360deg)
+                         scale(1.5)`,
+
                     opacity: 0
+
                 }
+
             ],
+
             {
-                duration: 1700,
+
+                duration:
+                    1200 +
+                    Math.random() * 800,
+
                 easing: "ease-out"
+
             }
+
         );
-        setTimeout(() => el.remove(), 1800);
+
+
+        setTimeout(
+            () => el.remove(),
+            2200
+        );
+
     }
+
 }
-/*
-   Floating hearts
-*/
-for (let i = 0; i < 25; i++) {
-    const heart = document.createElement("div");
-    heart.className = "heart";
-    heart.innerHTML = "♡";
-    heart.style.left =
-        Math.random() * 100 + "vw";
-    heart.style.animationDelay =
-        Math.random() * 8 + "s";
-    heart.style.animationDuration =
-        (7 + Math.random() * 8) + "s";
-    document.getElementById("hearts")
-        .appendChild(heart);
-}
+
 </script>
+
 </body>
 </html>
